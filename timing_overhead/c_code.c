@@ -129,7 +129,7 @@ int main() {
     int size = 0;
 
     // Call the Python script and get the output
-    fp = popen("python3 /home/pi/Desktop/date/my_date.py", "r");
+    fp = popen("python3 /home/pi/Desktop/date/c_linked.py", "r");
     if (fp == NULL) {
         fprintf(stderr, "Failed to run command\n");
         exit(1);
