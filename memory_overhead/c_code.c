@@ -10,7 +10,7 @@
 
 #define MAX_ARRAY_SIZE 1000
 
-#define MAX_DEPTH 1000
+#define MAX_DEPTH 20
 #define MAX_CHILDREN 1000
 
 typedef struct PSTNode {
@@ -129,7 +129,7 @@ int main() {
     int size = 0;
 
     // Call the Python script and get the output
-    fp = popen("python3 /home/pi/Desktop/date/my_date.py", "r");
+    fp = popen("python3 /home/pi/Desktop/date/c_linked.py", "r");
     if (fp == NULL) {
         fprintf(stderr, "Failed to run command\n");
         exit(1);
@@ -154,15 +154,16 @@ int main() {
     //printf("\n");
 
     // Timing the creation of the probabilistic suffix tree
-    clock_t start_time = clock();
+    //clock_t start_time = clock();
     ProbabilisticSuffixTree* pst = create_pst(MAX_DEPTH);
     add_sequence(pst, sequence, size); // Add the entire sequence to the tree
-    clock_t end_time = clock();
-    double build_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
-    printf("%f", build_time);
+    //clock_t end_time = clock();
+    //double build_time = (double)(end_time - start_time) / CLOCKS_PER_SEC;
+    //printf("%f", build_time);
 
+     // need to uncomment the following line to get the inference time mmeory consumption
     // Timing the prediction
-    //int prediction_length = 5; // Change this to the length of the sequence you want to predict
+    //int prediction_length = 10; // Change this to the length of the sequence you want to predict
     //int last_sequence[MAX_DEPTH]; // Prepare the last sequence for prediction
     //memcpy(last_sequence, &sequence[size - prediction_length], prediction_length * sizeof(int));
 
