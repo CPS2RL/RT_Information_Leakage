@@ -3,7 +3,7 @@
 
 ## Synthetic taskset generation: 
 
-Generate taskset using the script `taskset_generation.py` . This script will generate two separate files for the WCET and period of each task for 100 task sets.
+Generate taskset using the script `taskset_generation.py` . This script will generate two separate files for the WCET and period of each task for 100 task sets. These files need to be used in `evaluation.py` to perform different synthetic experiments.
 
 ## Timing Overhead:
 To measure timing overhead run the shell script `run_c_code.sh`
