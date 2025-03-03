@@ -86,11 +86,10 @@ def task2():
 # Task 3 function simulates execution by sleeping for its execution time
 def task3():
     global count
-    rt=[16.009999999999998, 19.009999999999998, 19.009999999999998, 16.009999999999998, 20.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 20.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 20.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 16.009999999999998, 20.009999999999998]
+    rt=predict(victim_response_time)
 
-    if rt[count]>19:
+    if rt[count]>threshold:
       print("observer predicts critcal arrival")
-      #time.sleep(20)
       freeze_servo(Servo)
     count+=1
     print("Executing Task 3")
@@ -138,7 +137,6 @@ def execute_task(task_name, current_time):
     print(f"Elapsed time for {task_name}: {elapsed_time:.2f} seconds\n")
 
 # Real-Time Scheduler based on RM Scheduling
-# Real-Time Scheduler based on RM Scheduling
 def rm_scheduler(simulation_time):
     # Initialize task queues
     task_queue = []
@@ -170,13 +168,11 @@ def rm_scheduler(simulation_time):
                 # Handle any potential inconsistencies, if needed
                 pass
         else:
-            # If no task is ready, sleep until the next task's arrival
             next_task_time = min(task["next_arrival"] for task in tasks.values())  # Find the next task arrival time
             time_to_wait = max(0, next_task_time - current_time)  # Calculate time to wait
-            #print(f"No task ready at time {current_time}. Sleeping for {time_to_wait:.2f} seconds.")
             time.sleep(time_to_wait)  # Sleep for the calculated time
             current_time = next_task_time  # Advance the current time to the next task's arrival time
 
-# Run the RM Scheduler for a total simulation time of 200 seconds
+
 simulation_duration = 1500
 rm_scheduler(simulation_duration)
