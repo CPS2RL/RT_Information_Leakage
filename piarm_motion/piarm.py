@@ -71,19 +71,16 @@ def task1():
     	move_shovel_up()
     else:
     	print("Executing Task 1: Robot Arm Control: Typical Execution")
-    	#maintain_fixed_position()
     	move_arm_down()
     	move_shovel_down()
     	move_arm_up()
     	move_shovel_up()
 
 
-# Task 2 function simulates execution by sleeping for its execution time
 def task2():
     print("Executing Task 2")
-    time.sleep(5)  # Simulates the execution time of 5 seconds
+    time.sleep(5) 
 
-# Task 3 function simulates execution by sleeping for its execution time
 def task3():
     global count
     rt=predict(victim_response_time)
@@ -93,16 +90,16 @@ def task3():
       freeze_servo(Servo)
     count+=1
     print("Executing Task 3")
-    time.sleep(2)  # Simulates the execution time of 2 seconds
+    time.sleep(2)
 
-# Define task periods and their execution times
+
 tasks = {
     "Task 1": {"period": 30, "execution_time": 13, "function": task1, "next_arrival": 0},  # Task 1 with robot arm movements
     "Task 2": {"period": 50, "execution_time": 5, "function": task2, "next_arrival": 0},   # Task 2 with sleep
     "Task 3": {"period": 100, "execution_time": 2, "function": task3, "next_arrival": 0}   # Task 3 with sleep
 }
 
-# RM Scheduling Priority: tasks sorted by period (shorter period -> higher priority)
+# RM Scheduling Priority
 task_priority = ["Task 1", "Task 2", "Task 3"]
 
 # Global start time to simulate clock starting at zero
@@ -115,28 +112,21 @@ def execute_task(task_name, current_time):
     global system_start_time
     task = tasks[task_name]
     
-    # If it's the first task, set the system start time
     if system_start_time is None:
         system_start_time = time.time()
     
-    # Get the actual start time of the task and calculate the relative time from system start
     start_time = time.time()
     relative_start_time = start_time - system_start_time
-    #print(f"Starting {task_name} at time {current_time} (relative start time: {relative_start_time:.2f} seconds)")
     print(f"Starting {task_name} at time: {relative_start_time:.2f} seconds")
-    #print(task["function"])	
     task["function"]()  # Call the task's function
     
-    # Get the actual finish time of the task and calculate the relative time from system start
     finish_time = time.time()
     relative_finish_time = finish_time - system_start_time
     elapsed_time = finish_time - start_time  # Calculate the task's execution duration
     task["next_arrival"] += task["period"]  # Schedule the next arrival time for the task
-    #print(f"Finished {task_name} execution at time {current_time + task['execution_time']} (relative finish time: {relative_finish_time:.2f} seconds)")
     print(f"Finished {task_name} execution at time: {relative_finish_time:.2f} seconds)")
     print(f"Elapsed time for {task_name}: {elapsed_time:.2f} seconds\n")
 
-# Real-Time Scheduler based on RM Scheduling
 def rm_scheduler(simulation_time):
     # Initialize task queues
     task_queue = []
@@ -144,7 +134,6 @@ def rm_scheduler(simulation_time):
     # Initialize current time
     current_time = 0
 
-    # Run the scheduler until the simulation time is reached
     while current_time < simulation_time:
         # Check for tasks that are ready to run
         for task_name in task_priority:
